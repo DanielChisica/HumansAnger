@@ -12,6 +12,7 @@ package humanangers;
 public class Battlefield {
 
     //Falta implementar un for conn un Math random por el numero de enemigos a enfrentar.
+    //bueno
     private Character[] heroes;
 
     private Character[] foes;
