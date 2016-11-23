@@ -9,6 +9,9 @@ package humanangers;
  *
  * @author EAN
  */
+
+//En este metodo podria ingresar un heroe como tal ya que no es necesario que el vector 
+//completo se mueva, e igualmente en la batalla ya no moveremos los characters
 public class Map {
 
     public void move(Character[] Heroes) {

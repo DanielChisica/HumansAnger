@@ -12,7 +12,7 @@ package humanangers;
 public class Battlefield {
 
     //Falta implementar un for conn un Math random por el numero de enemigos a enfrentar.
-    //ahora pruebo mi usuario
+    
     private Character[] heroes;
 
     private Character[] foes;
@@ -39,7 +39,8 @@ public class Battlefield {
 
     }
 
-
+    //Este codiggo se puede omitir ya que se puede reemplazar por un boton en el GUI
+    //e imprimir un mensaje cuando se retiren del juego como viles ratas
     public void run() {
 
     }
