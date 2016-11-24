@@ -68,7 +68,13 @@ public class Map {
         this.mapOfWorld = mapOfWorld;
         
     }
-
+    
+    public void changeHeroesName(String hunterRobotName, String wizardRobotName, String warriorRobotName) {
+        hunterRobot.setName(hunterRobotName);
+        wizardRobot.setName(wizardRobotName);
+        warriorRobot.setName(warriorRobotName);
+    }
+    
     public void move(Character[] Heroes) {
 
     }
