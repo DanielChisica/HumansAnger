@@ -65,11 +65,7 @@ public class Bestiary {
      *
      * @param Yourname
      */
-    public void changeHeroesName(String hunterRobotName, String wizardRobotName, String warriorRobotName) {
-        hunterRobot.setName(hunterRobotName);
-        wizardRobot.setName(wizardRobotName);
-        warriorRobot.setName(warriorRobotName);
-    }
+  
 
     public void bless(Character y, Character x) {
 
