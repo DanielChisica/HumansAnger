@@ -34,7 +34,12 @@ public class Map {
     private Character hunterRobot;
     private Character wizardRobot;
     private Character warriorRobot;
-    private int[][] mapOfWorld;
+    private int[][] mapOfWorld = new int [15][15];
+    public final int empty = 0;
+    public final int robot = 1;
+    public final int boss = 2;
+    public final int treasure = 3;
+    public final int obstacle = 4;
     
     /**
     *Vectores que se utilizaran para almacenar los heroes y enemigos que entraran a una batalla
@@ -44,7 +49,7 @@ public class Map {
     private Character[] Heroes;
     private Character[] Enemys;       
 
-    public Map(Character Hades, Character Cerberus, Character Baphomet, Character Ra, Character Anubis, Character Jesus, Character Vishnu, Character Arcangel, Character Vassago, Character Lilith, Character Ucrunius, Character Ganesha, Character Beleth, Character Bifrons, Character Emmao, Character Marduk, Character Set, Character hunterRobot, Character wizardRobot, Character warriorRobot, int[][] mapOfWorld) {
+    public Map() {
         this.Hades = Hades;
         this.Cerberus = Cerberus;
         this.Baphomet = Baphomet;
@@ -67,6 +72,32 @@ public class Map {
         this.warriorRobot = warriorRobot;
         this.mapOfWorld = mapOfWorld;
         
+        for (int[] map: mapOfWorld) {
+            for (int j = 0; j < map.length; j++) {
+                map[j] = empty; 
+            }
+        }
+        
+        mapOfWorld[0][6]=robot;
+        mapOfWorld[0][4]=treasure;
+        mapOfWorld[10][15]=treasure;
+        mapOfWorld[4][4]=boss;
+        mapOfWorld[0][15]=treasure;
+        mapOfWorld[5][2]=treasure;
+        mapOfWorld[10][2]=treasure;
+        mapOfWorld[12][11]=treasure;
+        mapOfWorld[8][4]=treasure;
+        
+        
+        for (int i = 0; i < mapOfWorld.length-1; i++) {
+            mapOfWorld[1][i]=obstacle;
+        }
+        
+        
+        for (int i = 1; i < mapOfWorld[3].length; i++) {
+            mapOfWorld[3][i]=obstacle;
+        }
+        
     }
     
     public void changeHeroesName(String hunterRobotName, String wizardRobotName, String warriorRobotName) {
@@ -76,18 +107,6 @@ public class Map {
     }
     
     public void move(Character[] Heroes) {
-
-    }
-
-    public void generateTreasures() {
-
-    }
-
-    public void findTreasure() {
-
-    }
-
-    public void renameCharacter(Character heroes[]) {
 
     }
 
