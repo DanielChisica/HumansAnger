@@ -10,6 +10,29 @@ public class Map {
      */
     public static void main(String[] args) {
         
+        
+        
+        Map map1=new Map();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveRight();
+        map1.verMapa();
+        map1.moveDown();
+        map1.verMapa();
+        /**
         Battlefield battlefield = new Battlefield(); 
         //Asigna enemigos aleatoriamente
         Character[] enemigos = battlefield.generarEnemigos((int) (Math.random() * 4));
@@ -19,7 +42,7 @@ public class Map {
         battlefield.setUsr(heroes);
         //Inicia un autobatalla
         battlefield.autoKombat(battlefield.getHeroes(), battlefield.getFoes());
-        
+        */
     
         
     }
@@ -47,13 +70,14 @@ public class Map {
     private Character hunterRobot;
     private Character wizardRobot;
     private Character warriorRobot;
-    private int[][] mapOfWorld = new int[15][15];
-    public final int empty = 0;
-    public final int robot = 1;
-    public final int boss = 2;
-    public final int treasure = 3;
-    public final int obstacle = 4;
-
+    private static int[][] mapOfWorld = new int[15][15];
+    /**public static final int 0 = 0;
+    public static final int 1 = 1;  Robot
+    public static final int 2 = 2;  Boss
+    public static final int 3 = 3;  Treasure
+    public static final int 4 = 4;  Obstacle
+    */
+    
     /**
      * Vectores que se utilizaran para almacenar los heroes y enemigos que
      * entraran a una batalla y poder ubicarlos en la grilla. No entran como
@@ -87,26 +111,26 @@ public class Map {
 
         for (int[] map : mapOfWorld) {
             for (int j = 0; j < map.length; j++) {
-                map[j] = empty;
+                map[j] = 0;
             }
         }
 
-        mapOfWorld[0][6] = robot;
-        mapOfWorld[0][4] = treasure;
-        mapOfWorld[10][15] = treasure;
-        mapOfWorld[4][4] = boss;
-        mapOfWorld[0][15] = treasure;
-        mapOfWorld[5][2] = treasure;
-        mapOfWorld[10][2] = treasure;
-        mapOfWorld[12][11] = treasure;
-        mapOfWorld[8][4] = treasure;
+        mapOfWorld[0][6] = 1;
+        mapOfWorld[0][4] = 3;
+        mapOfWorld[10][14] = 3;
+        mapOfWorld[4][4] = 2;
+        mapOfWorld[0][14] = 3;
+        mapOfWorld[5][2] = 3;
+        mapOfWorld[10][2] = 3;
+        mapOfWorld[12][11] = 3;
+        mapOfWorld[8][4] = 3;
 
         for (int i = 0; i < mapOfWorld.length - 1; i++) {
-            mapOfWorld[1][i] = obstacle;
+            mapOfWorld[1][i] = 4;
         }
 
         for (int i = 1; i < mapOfWorld[3].length; i++) {
-            mapOfWorld[3][i] = obstacle;
+            mapOfWorld[3][i] = 4;
         }
 
     }
@@ -153,7 +177,7 @@ public class Map {
         int[] retorno = new int[2];
         for (int i = 0; i < getMap().length; i++) {
             for (int j = 0; j < getMap()[i].length; j++) {
-                if(getMap()[i][j]== robot){
+                if(getMap()[i][j]== 1){
                     retorno[0]=i;
                     retorno[1]=j;
                 }
@@ -166,18 +190,18 @@ public class Map {
         int [] posHeroe = findRobot();
         try {
             switch (getMap()[posHeroe[0]][posHeroe[1]+1]) {
-                case empty:
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]][posHeroe[1]+1] = robot;
+                case 0:
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]][posHeroe[1]+1] = 1;
                     return true;
-                case boss:
+                case 2:
                     break;
-                case treasure:
+                case 3:
                     //grabTreasure();
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]][posHeroe[1]+1] = robot;
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]][posHeroe[1]+1] = 1;
                     return true;
-                case obstacle:
+                case 4:
                     return false;
                 default:
                     break;
@@ -193,18 +217,72 @@ public class Map {
         int [] posHeroe = findRobot();
         try {
             switch (getMap()[posHeroe[0]][posHeroe[1]-1]) {
-                case empty:
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]][posHeroe[1]-1] = robot;
+                case 0:
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]][posHeroe[1]-1] = 1;
                     return true;
-                case boss:
+                case 2:
                     break;
-                case treasure:
+                case 3:
                     grabTreasure();
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]][posHeroe[1]-1] = robot;
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]][posHeroe[1]-1] = 1;
                     return true;
-                case obstacle:
+                case 4:
+                    return false;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("You've reached the end");
+            return false;
+        }
+        return false;
+    }
+    
+    public boolean moveDown(){
+        int [] posHeroe = findRobot();
+        try {
+            switch (getMap()[posHeroe[0]+1][posHeroe[1]]) {
+                case 0:
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]+1][posHeroe[1]] = 1;
+                    return true;
+                case 2:
+                    break;
+                case 3:
+                    //grabTreasure();
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]+1][posHeroe[1]] = 1;
+                    return true;
+                case 4:
+                    return false;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("You've reached the end");
+            return false;
+        }
+        return false;
+    }
+
+     public boolean moveUp(){
+        int [] posHeroe = findRobot();
+        try {
+            switch (getMap()[posHeroe[0]-1][posHeroe[1]]) {
+                case 0:
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]-1][posHeroe[1]] = 1;
+                    return true;
+                case 2:
+                    break;
+                case 3:
+                    //grabTreasure();
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =0;
+                    mapOfWorld[posHeroe[0]-1][posHeroe[1]] = 1;
+                    return true;
+                case 4:
                     return false;
                 default:
                     break;
@@ -224,6 +302,8 @@ public class Map {
         for (int i = 0; i < mapOfWorld.length; i++) {
             System.out.println(Arrays.toString(mapOfWorld[i]));
         }
+        System.out.println();
+        System.out.println();
     }
     
     
