@@ -12,9 +12,7 @@ package humanangers;
 public class Battlefield {
 
     //Falta implementar un for conn un Math random por el numero de enemigos a enfrentar.
-    
     private Character[] heroes;
-
     private Character[] foes;
 
     public Character[] getHeroes() {
@@ -46,12 +44,58 @@ public class Battlefield {
     }
 
     public void defend() {
-//
     }
 
     public void useSkill() {
     }
-    
-    
 
-}
+    public Character[] generarEnemigos(int num) {
+        //Genera enemigos con stat aleatorios.
+        //Num = numero de enemigos
+        Character[] enemigos = new Character[num];
+        int rate = (int) (Math.random() * 2);
+        for (int i = 0; i < enemigos.length; i++) {
+            enemigos[i] = new Character("Enemy " + i, true, true, rate, rate, rate, rate, rate);
+        }
+        return enemigos;
+    }
+
+    public Character[] generarHeroes(int num) {
+        //Genera Heroes con stat aleatorios.
+        //Num = numero de Heroes
+        Character[] Heroes = new Character[num];
+        int rate = (int) (Math.random() * 2);
+        for (int i = 0; i < Heroes.length; i++) {
+            Heroes[i] = new Character("Heroe " + i, true, true, rate, rate, rate, rate, rate);
+        }
+        return Heroes;
+
+    }
+    
+    public void autoKombat(Character[] heroes, Character[] enemigos) {
+        int contador = 0;
+        System.out.println("Ha inciado el combate");
+        if (agilidadGrupal(heroes)>agilidadGrupal(enemigos)) {
+            System.out.println("¡La batalla ha comenzado!" +"Los heroes tienen el turno");
+            contador++;
+         
+            
+        }
+        
+        if (agilidadGrupal(foes)>agilidadGrupal(heroes)) {
+              System.out.println("¡La batalla ha comenzado!" +"Los enemigos tienen el turno");
+            contador++;
+        }
+            
+        }
+    public int agilidadGrupal(Character [] x){
+        int total = 0;
+        for (int i = 0; i <x.length; i++) {
+            total+=x[i].getAgility();
+            System.out.println("La agilidad del grupo es de " + total);
+            
+        }
+    return total;
+    }
+    }
+    

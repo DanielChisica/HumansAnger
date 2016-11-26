@@ -1,20 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package humanangers;
 
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 
-/**
- *
- * @author EAN
- */
-//En este metodo podria ingresar un heroe como tal ya que no es necesario que el vector 
-//completo se mueva, e igualmente en la batalla ya no moveremos los characters
 public class Map {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        Battlefield battlefield = new Battlefield(); 
+        //Asigna enemigos aleatoriamente
+        battlefield.setFoes(battlefield.generarEnemigos((int) (Math.random() * 4)));
+        //Asigna Heroes aleatoriamente
+        battlefield.setUsr(battlefield.generarHeroes((int) (Math.random() * 4)));
+        
+    }
+    
+    
+   
 
     private Character Hades;
     private Character Cerberus;
@@ -51,13 +55,6 @@ public class Map {
     private Character[] Heroes;
     private Character[] Enemys;
 
-    public static void main(String[] args) {
-       Map map1=new Map();
-       map1.verMapa();
-    }
-    
-    
-    
     public Map() {
         this.Hades = Hades;
         this.Cerberus = Cerberus;
@@ -169,7 +166,7 @@ public class Map {
                 case boss:
                     break;
                 case treasure:
-                    grabTreasure();
+                    //grabTreasure();
                     mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
                     mapOfWorld[posHeroe[0]][posHeroe[1]+1] = robot;
                     return true;
@@ -211,70 +208,13 @@ public class Map {
         }
         return false;
     }
-    
-    public boolean moveUp(){
-        int [] posHeroe = findRobot();
-        try {
-            switch (getMap()[posHeroe[0]-1][posHeroe[1]]) {
-                case empty:
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]-1][posHeroe[1]] = robot;
-                    return true;
-                case boss:
-                    break;
-                case treasure:
-                    grabTreasure();
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]-1][posHeroe[1]] = robot;
-                    return true;
-                case obstacle:
-                    return false;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            System.out.println("You've reached the end");
-            return false;
-        }
-        return false;
-    }
-    
-    public boolean moveDown(){
-        int [] posHeroe = findRobot();
-        try {
-            switch (getMap()[posHeroe[0]+1][posHeroe[1]]) {
-                case empty:
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]+1][posHeroe[1]] = robot;
-                    return true;
-                case boss:
-                    break;
-                case treasure:
-                    grabTreasure();
-                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
-                    mapOfWorld[posHeroe[0]+1][posHeroe[1]] = robot;
-                    return true;
-                case obstacle:
-                    return false;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            System.out.println("You've reached the end");
-            return false;
-        }
-        return false;
-    }
-
 
     private void grabTreasure() {
          this.hunterRobot.setCurrentHp((int) (this.hunterRobot.getCurrentHp() + Math.random() * 5));
          
     }
     
-    public void verMapa(){
-        for (int i = 0; i < mapOfWorld.length; i++) {
-            System.out.println(Arrays.toString(mapOfWorld[i]));
-        }
-    }
+    
+    
+  
 }
