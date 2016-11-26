@@ -21,7 +21,7 @@ public class Character {
     private int mp = 300;
     private int currentHp;
     private int atk = 1000;
-    private int def = 500;
+    private int def =  atk*3/4;
     private int agility = 250;
     private int accuracy;
     private boolean usemagic, useskill;

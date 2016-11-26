@@ -5,6 +5,8 @@
  */
 package humanangers;
 
+import java.util.List;
+
 /**
  *
  * @author tania
@@ -53,9 +55,9 @@ public class Battlefield {
         //Genera enemigos con stat aleatorios.
         //Num = numero de enemigos
         Character[] enemigos = new Character[num];
-        int rate = (int) (Math.random() * 2);
+        int rate = (int) (Math.random() * 1.5);
         for (int i = 0; i < enemigos.length; i++) {
-            enemigos[i] = new Character("Enemy " + i, true, true, rate, rate, rate, rate, rate);
+            enemigos[i] = new Character("Enemy " + i, true, true, (int) (Math.random() * 1.2), (int) (1 + Math.random() * 2), (int) (Math.random() * 2), rate, rate);
         }
         return enemigos;
     }
@@ -64,9 +66,9 @@ public class Battlefield {
         //Genera Heroes con stat aleatorios.
         //Num = numero de Heroes
         Character[] Heroes = new Character[num];
-        int rate = (int) (Math.random() * 2);
+        int rate = (int) (Math.random() * 1.5);
         for (int i = 0; i < Heroes.length; i++) {
-            Heroes[i] = new Character("Heroe " + i, true, true, rate, rate, rate, rate, rate);
+            Heroes[i] = new Character("Heroe " + i, true, true, (int) (Math.random() * 2), (int) (Math.random() * 1.2), (int) (Math.random() * 2), rate, rate);
         }
         return Heroes;
 
@@ -80,25 +82,41 @@ public class Battlefield {
             contador++;
             for (int i = 0; i < heroes.length; i++) {
                 for (int j = 0; j < enemigos.length; j++) {
-                    int dmg = heroes[i].getAtk()-enemigos[j].getDef();
-                    System.out.println("La defensa del enemigo "+ j +" es " +enemigos[j].getDef());
-                    System.out.println("El daño del ataque fue "+dmg);
-                    enemigos[i].setHp(enemigos[j].getHp()-dmg);
+                    int dmg = heroes[i].getAtk() - enemigos[j].getDef();
+                    if (dmg < 0) {
+                        int tmg = enemigos[j].getDef() - heroes[i].getAtk();
+                        dmg = tmg - dmg;
+                    }
+                    System.out.println("La defensa del enemigo " + j + " es " + enemigos[j].getDef());
+                    System.out.println("El daño del ataque fue " + dmg);
+                    enemigos[i].setHp(enemigos[i].getHp() - dmg);
+                    if (enemigos[i].getHp() <= 0) {
+                        
+                        System.out.println("El enemigo "+ enemigos[i] +" ha sido asesinado");
+                    }
+                    System.out.println("La salud restante fue " + enemigos[j].getHp());
 
                 }
+
             }
 
         } else {
             System.out.println("¡La batalla ha comenzado!" + "Los Enemigos tienen el turno");
-             contador++;
+            contador++;
             for (int i = 0; i < heroes.length; i++) {
                 for (int j = 0; j < enemigos.length; j++) {
-                    int dmg = heroes[i].getAtk()-enemigos[j].getDef();
-                     System.out.println("La defensa del enemigo "+ j +"es " +enemigos[j].getDef());
-                    System.out.println("El daño del ataque fue "+dmg);
-                    enemigos[i].setHp(enemigos[i].getHp()-dmg);
+                    int dmg = enemigos[i].getAtk() - heroes[j].getDef();
+                    if (dmg < 0) {
+                        int tmg = enemigos[j].getDef() - heroes[i].getAtk();
+                        dmg = tmg - dmg;
+                    }
+                    System.out.println("La defensa del heroe " + j + " es " + heroes[j].getDef());
+                    System.out.println("El daño del ataque fue " + dmg);
+                    heroes[i].setHp(heroes[i].getHp() - dmg);
+                    System.out.println("La salud restante del heroe fue de " + heroes[j].getHp());
 
                 }
+
             }
 
         }

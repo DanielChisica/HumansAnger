@@ -12,10 +12,11 @@ public class Map {
         
         Battlefield battlefield = new Battlefield(); 
         //Asigna enemigos aleatoriamente
-        Character[] enemigos = battlefield.generarEnemigos((int) (Math.random() * 4));
+        int numEne = (int) (2+Math.random() * 4);
+        Character[] enemigos = battlefield.generarEnemigos(numEne);
         battlefield.setFoes(enemigos);
         //Asigna Heroes aleatoriamente
-        Character[] heroes = battlefield.generarHeroes((int) (Math.random() * 4));
+        Character[] heroes = battlefield.generarHeroes((int) (numEne));
         battlefield.setUsr(heroes);
         //Inicia un autobatalla
         battlefield.autoKombat(battlefield.getHeroes(), battlefield.getFoes());
