@@ -6,6 +6,7 @@
 package humanangers;
 
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 /**
  *
@@ -50,6 +51,13 @@ public class Map {
     private Character[] Heroes;
     private Character[] Enemys;
 
+    public static void main(String[] args) {
+       Map map1=new Map();
+       map1.verMapa();
+    }
+    
+    
+    
     public Map() {
         this.Hades = Hades;
         this.Cerberus = Cerberus;
@@ -203,9 +211,70 @@ public class Map {
         }
         return false;
     }
+    
+    public boolean moveUp(){
+        int [] posHeroe = findRobot();
+        try {
+            switch (getMap()[posHeroe[0]-1][posHeroe[1]]) {
+                case empty:
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
+                    mapOfWorld[posHeroe[0]-1][posHeroe[1]] = robot;
+                    return true;
+                case boss:
+                    break;
+                case treasure:
+                    grabTreasure();
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
+                    mapOfWorld[posHeroe[0]-1][posHeroe[1]] = robot;
+                    return true;
+                case obstacle:
+                    return false;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("You've reached the end");
+            return false;
+        }
+        return false;
+    }
+    
+    public boolean moveDown(){
+        int [] posHeroe = findRobot();
+        try {
+            switch (getMap()[posHeroe[0]+1][posHeroe[1]]) {
+                case empty:
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
+                    mapOfWorld[posHeroe[0]+1][posHeroe[1]] = robot;
+                    return true;
+                case boss:
+                    break;
+                case treasure:
+                    grabTreasure();
+                    mapOfWorld[posHeroe[0]][posHeroe[1]] =empty;
+                    mapOfWorld[posHeroe[0]+1][posHeroe[1]] = robot;
+                    return true;
+                case obstacle:
+                    return false;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("You've reached the end");
+            return false;
+        }
+        return false;
+    }
+
 
     private void grabTreasure() {
          this.hunterRobot.setCurrentHp((int) (this.hunterRobot.getCurrentHp() + Math.random() * 5));
          
+    }
+    
+    public void verMapa(){
+        for (int i = 0; i < mapOfWorld.length; i++) {
+            System.out.println(Arrays.toString(mapOfWorld[i]));
+        }
     }
 }
