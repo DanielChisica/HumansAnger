@@ -1,6 +1,7 @@
 package humanangers;
 
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 public class Map {
 
@@ -14,6 +15,8 @@ public class Map {
         battlefield.setFoes(battlefield.generarEnemigos((int) (Math.random() * 4)));
         //Asigna Heroes aleatoriamente
         battlefield.setUsr(battlefield.generarHeroes((int) (Math.random() * 4)));
+        
+        battlefield.autoKombat(battlefield.getHeroes(), battlefield.getFoes());
         
     }
     
@@ -212,6 +215,11 @@ public class Map {
     private void grabTreasure() {
          this.hunterRobot.setCurrentHp((int) (this.hunterRobot.getCurrentHp() + Math.random() * 5));
          
+    }
+    public void verMapa(){
+        for (int i = 0; i < mapOfWorld.length; i++) {
+            System.out.println(Arrays.toString(mapOfWorld[i]));
+        }
     }
     
     

@@ -71,31 +71,28 @@ public class Battlefield {
         return Heroes;
 
     }
-    
+
     public void autoKombat(Character[] heroes, Character[] enemigos) {
         int contador = 0;
         System.out.println("Ha inciado el combate");
-        if (agilidadGrupal(heroes)>agilidadGrupal(enemigos)) {
-            System.out.println("¡La batalla ha comenzado!" +"Los heroes tienen el turno");
+        if (agilidadGrupal(heroes) > agilidadGrupal(enemigos)) {
+            System.out.println("¡La batalla ha comenzado!" + "Los heroes tienen el turno");
             contador++;
-         
-            
+
+        } else {
+            System.out.println("¡La batalla ha comenzado!" + "Los Enemigos tienen el turno");
+
         }
-        
-        if (agilidadGrupal(foes)>agilidadGrupal(heroes)) {
-              System.out.println("¡La batalla ha comenzado!" +"Los enemigos tienen el turno");
-            contador++;
-        }
-            
-        }
-    public int agilidadGrupal(Character [] x){
+
+    }
+
+    public int agilidadGrupal(Character[] x) {
         int total = 0;
-        for (int i = 0; i <x.length; i++) {
-            total+=x[i].getAgility();
-            System.out.println("La agilidad del grupo es de " + total);
-            
+        for (int i = 0; i < x.length; i++) {
+            total += x[i].getAgility();
+
         }
-    return total;
+
+        return total;
     }
-    }
-    
+}
