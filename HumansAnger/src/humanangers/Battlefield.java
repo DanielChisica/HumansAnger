@@ -78,9 +78,28 @@ public class Battlefield {
         if (agilidadGrupal(heroes) > agilidadGrupal(enemigos)) {
             System.out.println("¡La batalla ha comenzado!" + "Los heroes tienen el turno");
             contador++;
+            for (int i = 0; i < heroes.length; i++) {
+                for (int j = 0; j < enemigos.length; j++) {
+                    int dmg = heroes[i].getAtk()-enemigos[j].getDef();
+                    System.out.println("La defensa del enemigo "+ j +" es " +enemigos[j].getDef());
+                    System.out.println("El daño del ataque fue "+dmg);
+                    enemigos[i].setHp(enemigos[j].getHp()-dmg);
+
+                }
+            }
 
         } else {
             System.out.println("¡La batalla ha comenzado!" + "Los Enemigos tienen el turno");
+             contador++;
+            for (int i = 0; i < heroes.length; i++) {
+                for (int j = 0; j < enemigos.length; j++) {
+                    int dmg = heroes[i].getAtk()-enemigos[j].getDef();
+                     System.out.println("La defensa del enemigo "+ j +"es " +enemigos[j].getDef());
+                    System.out.println("El daño del ataque fue "+dmg);
+                    enemigos[i].setHp(enemigos[i].getHp()-dmg);
+
+                }
+            }
 
         }
 
