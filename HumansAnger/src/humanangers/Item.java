@@ -44,6 +44,5 @@ public class Item {
         this.equip = equip;
     }
 
-    
-    
+        
 }
