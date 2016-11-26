@@ -5,8 +5,6 @@
  */
 package humanangers;
 
-import java.util.List;
-
 /**
  *
  * @author tania
@@ -57,7 +55,7 @@ public class Battlefield {
         Character[] enemigos = new Character[num];
         int rate = (int) (Math.random() * 1.5);
         for (int i = 0; i < enemigos.length; i++) {
-            enemigos[i] = new Character("Enemy " + i, true, true, (int) (Math.random() * 1.2), (int) (1 + Math.random() * 2), (int) (Math.random() * 2), rate, rate);
+            enemigos[i] = new Character("Enemy " + i + "", true, true, (int) (Math.random() * 1.2), (int) ( Math.random() * 1.2), (int) (Math.random() * 2), rate, rate);
         }
         return enemigos;
     }
@@ -68,13 +66,14 @@ public class Battlefield {
         Character[] Heroes = new Character[num];
         int rate = (int) (Math.random() * 1.5);
         for (int i = 0; i < Heroes.length; i++) {
-            Heroes[i] = new Character("Heroe " + i, true, true, (int) (Math.random() * 2), (int) (Math.random() * 1.2), (int) (Math.random() * 2), rate, rate);
+            Heroes[i] = new Character("Heroe " + i + "", true, true, (int) (Math.random() * 1.2), (int) (Math.random() * 1.2), (int) (Math.random() * 2), rate, rate);
         }
         return Heroes;
 
     }
 
     public void autoKombat(Character[] heroes, Character[] enemigos) {
+
         int contador = 0;
         System.out.println("Ha inciado el combate");
         if (agilidadGrupal(heroes) > agilidadGrupal(enemigos)) {
@@ -87,17 +86,21 @@ public class Battlefield {
                         int tmg = enemigos[j].getDef() - heroes[i].getAtk();
                         dmg = tmg - dmg;
                     }
-                    System.out.println("La defensa del enemigo " + j + " es " + enemigos[j].getDef());
-                    System.out.println("El daño del ataque fue " + dmg);
-                    enemigos[i].setHp(enemigos[i].getHp() - dmg);
-                    if (enemigos[i].getHp() <= 0) {
-                        
-                        System.out.println("El enemigo "+ enemigos[i] +" ha sido asesinado");
-                    }
-                    System.out.println("La salud restante fue " + enemigos[j].getHp());
+//                    System.out.println("La defensa del enemigo " + j + " es " + enemigos[j].getDef());
+//                    System.out.println("El daño del ataque fue " + dmg);
+                    enemigos[i].setCurrentHp(enemigos[i].getHp() - dmg);
 
                 }
-
+                if (enemigos[i].getCurrentHp() <= 0) {
+                    enemigos[i].setAccuracy(0);
+                    enemigos[i].setAgility(0);
+                    enemigos[i].setAtk(0);
+                    enemigos[i].setDef(0);
+                    enemigos[i].setMp(0);
+                    System.out.println("El personaje " + enemigos[i].getName() + " esta muerto");
+                } else {
+                    System.out.println("La salud restante de " + enemigos[i].getName() + " fue de " + enemigos[i].getCurrentHp());
+                }
             }
 
         } else {
@@ -106,17 +109,25 @@ public class Battlefield {
             for (int i = 0; i < heroes.length; i++) {
                 for (int j = 0; j < enemigos.length; j++) {
                     int dmg = enemigos[i].getAtk() - heroes[j].getDef();
-                    if (dmg < 0) {
+                    if (0 >= dmg) {
                         int tmg = enemigos[j].getDef() - heroes[i].getAtk();
                         dmg = tmg - dmg;
                     }
-                    System.out.println("La defensa del heroe " + j + " es " + heroes[j].getDef());
-                    System.out.println("El daño del ataque fue " + dmg);
-                    heroes[i].setHp(heroes[i].getHp() - dmg);
-                    System.out.println("La salud restante del heroe fue de " + heroes[j].getHp());
+//                    System.out.println("La defensa del heroe " + j + " es " + heroes[j].getDef());
+//                    System.out.println("El daño del ataque fue " + dmg);
+                    heroes[i].setCurrentHp(heroes[i].getHp() - dmg);
 
                 }
-
+                if (enemigos[i].getHp() <= 0) {
+                    enemigos[i].setAccuracy(0);
+                    enemigos[i].setAgility(0);
+                    enemigos[i].setAtk(0);
+                    enemigos[i].setDef(0);
+                    enemigos[i].setMp(0);
+                    System.out.println("El personaje " + heroes[i].getName() + " ha sido asesinado");
+                } else {
+                    System.out.println("La salud restante del " + heroes[i].getName() + " fue de " + heroes[i].getCurrentHp());
+                }
             }
 
         }
@@ -130,6 +141,14 @@ public class Battlefield {
 
         }
 
+        return total;
+    }
+
+    public int saludTotal(Character[] personajes) {
+        int total = 0;
+        for (int i = 0; i < personajes.length; i++) {
+            total += personajes[i].getCurrentHp();
+        }
         return total;
     }
 }

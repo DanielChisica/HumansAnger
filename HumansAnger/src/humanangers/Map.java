@@ -13,6 +13,7 @@ public class Map {
         Battlefield battlefield = new Battlefield(); 
         //Asigna enemigos aleatoriamente
         int numEne = (int) (2+Math.random() * 4);
+        numEne = 2;
         Character[] enemigos = battlefield.generarEnemigos(numEne);
         battlefield.setFoes(enemigos);
         //Asigna Heroes aleatoriamente
